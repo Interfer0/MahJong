@@ -10,7 +10,8 @@ public class MahJongBoard extends JPanel implements MouseListener
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Tile[] TILES = new Tile[144];
-
+	private static Image img;
+	
 	public MahJongBoard()
 	{
 		TILES = createTiles();
@@ -34,22 +35,24 @@ public class MahJongBoard extends JPanel implements MouseListener
 							{
 								t.setToolTipText(t.getNeighbors());
 							}
-							
 						}
 					}
 					);
 		}
 		addMouseListener(this);
-		add( new JPanel(){
 		
-				}
-						);
 		setVisible(true);
 		
 		
 		
 		this.repaint();
 	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		img = getToolkit().getImage(getClass().getResource("images/Dragon.png"));
+	    g.drawImage(img, this.getWidth()/2 - img.getWidth(this)/2, this.getHeight()/2 - img.getHeight(this)/2, this);
+	  }
 
 	private Tile[] createTiles()
 	{

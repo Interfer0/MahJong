@@ -10,17 +10,10 @@ public class MahJongModel implements LayoutManager
 	private static int tileNumber  = 0;
 
 	@Override
-	public void addLayoutComponent(String name, Component comp)
-	{
-
-
-	}
+	public void addLayoutComponent(String name, Component comp){}
 
 	@Override
-	public void removeLayoutComponent(Component comp)
-	{
-		
-	}
+	public void removeLayoutComponent(Component comp){}
 
 	@Override
 	public Dimension preferredLayoutSize(Container parent)
@@ -93,14 +86,10 @@ public class MahJongModel implements LayoutManager
 		int x = parent.getWidth()/2-7*Tile.getWIDTH()-3*Tile.getDEPTH();
 		int y = parent.getHeight()/2-2*Tile.getDEPTH();
 
-		
-
 		if (sizeUnknown)
 		{
 			setSizes(parent);
 		}
-
-
 
 		for (int i = 0; i < nComps; i++)
 		{
@@ -145,8 +134,6 @@ public class MahJongModel implements LayoutManager
 							MahJongBoard.getTILES()[tileNumber].setToL(MahJongBoard.getTILES()[tileNumber -1]);
 						}
 					}
-					
-					
 				}
 				//layer 3
 				if (i >= 6 && i <= 22)
@@ -166,8 +153,6 @@ public class MahJongModel implements LayoutManager
 							y -= previousHeight-Tile.getDEPTH();
 							counter = 0;
 						}else {
-							
-							
 							MahJongBoard.getTILES()[tileNumber].setToL(MahJongBoard.getTILES()[tileNumber -1]);
 							if(counter +1 != 4)
 								MahJongBoard.getTILES()[tileNumber].setToR(MahJongBoard.getTILES()[tileNumber +1]);

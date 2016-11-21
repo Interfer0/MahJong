@@ -18,7 +18,7 @@ public class MahJong extends JFrame implements WindowListener
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		this.setBackground(new Color(11, 112, 15));
-		setSize(1050, 1000);
+		setSize(1100, 1000);
 		setResizable(false);
 		add(new MahJongBoard());
 		setVisible(true);
