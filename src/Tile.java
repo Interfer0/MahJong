@@ -21,8 +21,8 @@ public abstract class Tile extends JPanel
 	static GradientPaint GRAD2;
 	static GradientPaint GRAD3;
 	static GradientPaint GRAD4;
-	private static int WIDTH = 75;
-	private static int HEIGHT = 100;
+	private static int WIDTH = 65;
+	private static int HEIGHT = 75;
 	private static int DEPTH = 10;
 	
 	private  Tile toL;
@@ -69,6 +69,7 @@ public abstract class Tile extends JPanel
 
 	public Tile()
 	{
+		setOpaque(false);
 		setBackground(null);
 		setPreferredSize(new Dimension(DEPTH + WIDTH + 1, DEPTH + HEIGHT + 1));
 		

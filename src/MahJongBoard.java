@@ -14,13 +14,10 @@ public class MahJongBoard extends JPanel implements MouseListener
 	public MahJongBoard()
 	{
 		TILES = createTiles();
-		setSize(1200, 1000);
+		//setSize(1200, 1000);
 		setPreferredSize(getSize());
 		this.setBackground(new Color(11, 112, 15));
-		add( new JPanel(){
-			
-		}
-				);
+		
 		MahJongModel model = new MahJongModel();
 		model.preferredLayoutSize(this);
 		this.setLayout(model);
@@ -43,6 +40,10 @@ public class MahJongBoard extends JPanel implements MouseListener
 					);
 		}
 		addMouseListener(this);
+		add( new JPanel(){
+		
+				}
+						);
 		setVisible(true);
 		
 		

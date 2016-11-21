@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.WindowEvent;
@@ -16,8 +17,8 @@ public class MahJong extends JFrame implements WindowListener
 	{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		
-		setSize(1200, 1000);
+		this.setBackground(new Color(11, 112, 15));
+		setSize(1050, 1000);
 		setResizable(false);
 		add(new MahJongBoard());
 		setVisible(true);

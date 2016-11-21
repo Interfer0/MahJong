@@ -108,7 +108,7 @@ public class MahJongModel implements LayoutManager
 			
 			Dimension d = c.getPreferredSize();
 
-				if(tileNumber == 144)
+				if(tileNumber == 144 || tileNumber == 145)
 					break;
 				//outlayers
 				if(i ==0)
