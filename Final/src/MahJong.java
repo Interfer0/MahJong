@@ -28,7 +28,6 @@ public class MahJong extends JFrame implements WindowListener
 	public static void main(String[] args) 
 	{
 		new MahJong();
-		
 
 	}
 
