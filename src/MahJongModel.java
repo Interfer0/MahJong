@@ -1,3 +1,8 @@
+/*
+ * Daniel Bigelow
+ * CS3230
+ * 11/21/16
+ */
 import java.awt.*;
 
 public class MahJongModel implements LayoutManager
@@ -16,33 +21,10 @@ public class MahJongModel implements LayoutManager
 	public void removeLayoutComponent(Component comp){}
 
 	@Override
-	public Dimension preferredLayoutSize(Container parent)
-	{
-		Dimension dim = new Dimension(0, 0);
-		setSizes(parent);
-
-		Insets insets = parent.getInsets();
-		dim.width = preferredWidth + insets.left + insets.right;
-		dim.height = preferredHeight + insets.top + insets.bottom;
-
-		sizeUnknown = false;
-
-		return dim;
-	}
+	public Dimension preferredLayoutSize(Container parent){return null;}
 
 	@Override
-	public Dimension minimumLayoutSize(Container parent)
-	{
-		Dimension dim = new Dimension(0, 0);
-
-		Insets insets = parent.getInsets();
-		dim.width = minWidth + insets.left + insets.right;
-		dim.height = minHeight + insets.top + insets.bottom;
-
-		sizeUnknown = false;
-
-		return dim;
-	}
+	public Dimension minimumLayoutSize(Container parent){return null;}
 
 	private void setSizes(Container parent)
 	{
@@ -97,22 +79,23 @@ public class MahJongModel implements LayoutManager
 			
 			Dimension d = c.getPreferredSize();
 
-				if(tileNumber == 144 || tileNumber == 145)
+				if(tileNumber == 144 || tileNumber == 145)		//Don't add anything to additional items added
 					break;
 				//outlayers
-				if(i ==0)
+				if(i ==0)	// tile is dar left tile
 				{
 					MahJongBoard.getTILES()[tileNumber].setToR(MahJongBoard.getTILES()[100]);
 					MahJongBoard.getTILES()[tileNumber].setToR2(MahJongBoard.getTILES()[88]);
 				}
 				//layer 1
-				if(i == 1){
+				if(i == 1)	//Tippytop tile
+				{	
 					x = parent.getWidth()/2-Tile.getWIDTH()/2; 
 					y = parent.getHeight()/2-Tile.getHEIGHT()/2;
 				}
 				
 				// layer 2
-				if (i > 1 && i <=6)
+				if (i > 1 && i <=6) 
 				{
 					MahJongBoard.getTILES()[tileNumber].setToB(MahJongBoard.getTILES()[1]);
 					if(i == 2)
@@ -159,6 +142,7 @@ public class MahJongModel implements LayoutManager
 							x += previousWidth - Tile.getDEPTH();
 						}
 					}
+					//set up tile in front links
 					if(tileNumber == 11 || tileNumber == 12)
 							((Tile)c).setToB(MahJongBoard.getTILES()[tileNumber -9]);
 					if(tileNumber == 15 || tileNumber == 16)
@@ -189,6 +173,7 @@ public class MahJongModel implements LayoutManager
 							x += previousWidth - Tile.getDEPTH();
 							counter++;
 						}
+						//set up tile in front links
 					if(tileNumber == 29 || tileNumber == 30 || tileNumber == 31 || tileNumber == 32  )
 							((Tile)c).setToB(MahJongBoard.getTILES()[tileNumber -23]);
 					if(tileNumber == 35 || tileNumber == 36 || tileNumber == 37 || tileNumber == 38  )
@@ -278,6 +263,7 @@ public class MahJongModel implements LayoutManager
 							counter++;
 						}
 						
+						//set up tile in front links
 					if(tileNumber == 71 || tileNumber == 72 || tileNumber == 73 || tileNumber == 74 ||
 							tileNumber == 75 || tileNumber == 76)
 							((Tile)c).setToB(MahJongBoard.getTILES()[tileNumber -49]);
@@ -297,6 +283,7 @@ public class MahJongModel implements LayoutManager
 							tileNumber == 127 || tileNumber == 128)
 							((Tile)c).setToB(MahJongBoard.getTILES()[tileNumber -71]);
 					}
+					//set up double blocked set special case
 					if(tileNumber == 100 || tileNumber == 88)
 					{
 						MahJongBoard.getTILES()[tileNumber].setToL(MahJongBoard.getTILES()[0]);

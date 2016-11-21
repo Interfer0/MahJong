@@ -1,8 +1,6 @@
 import java.awt.*;
 import javax.swing.JPanel;
 
-import org.w3c.dom.events.MouseEvent;
-
 /*
  * Daniel Bigelow
  * CS3230

@@ -1,3 +1,8 @@
+/*
+ * Daniel Bigelow
+ * CS3230
+ * 11/21/16
+ */
 import java.awt.*;
 import java.awt.event.*;
 
@@ -15,11 +20,10 @@ public class MahJongBoard extends JPanel implements MouseListener
 	public MahJongBoard()
 	{
 		TILES = createTiles();
-		//setSize(1200, 1000);
 		setPreferredSize(getSize());
 		this.setBackground(new Color(11, 112, 15));
 		
-		MahJongModel model = new MahJongModel();
+		MahJongModel model = new MahJongModel(); //Custom layout Model
 		model.preferredLayoutSize(this);
 		this.setLayout(model);
 		for (Tile t : TILES)
@@ -31,6 +35,7 @@ public class MahJongBoard extends JPanel implements MouseListener
 						public void mouseClicked(MouseEvent e)
 						{
 							((Tile)e.getSource()).setVisible(false);
+							//Update ToolTips Not needed in end game
 							for(Tile t : TILES)
 							{
 								t.setToolTipText(t.getNeighbors());
@@ -40,20 +45,18 @@ public class MahJongBoard extends JPanel implements MouseListener
 					);
 		}
 		addMouseListener(this);
-		
 		setVisible(true);
-		
-		
-		
 		this.repaint();
 	}
 	
+	//paint the background
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		img = getToolkit().getImage(getClass().getResource("images/Dragon.png"));
 	    g.drawImage(img, this.getWidth()/2 - img.getWidth(this)/2, this.getHeight()/2 - img.getHeight(this)/2, this);
 	  }
 
+	//create 144 tiles and return them in a array
 	private Tile[] createTiles()
 	{
 		int position = 0;
@@ -103,50 +106,32 @@ public class MahJongBoard extends JPanel implements MouseListener
 		return rtn;
 	}
 	
+	//Tile List
 	public static Tile[] getTILES()
 	{
 		return TILES;
 	}
 
-	public static void setTILES(Tile[] tILES)
+	
+	public static void setTILES(Tile[] Tiles)
 	{
-		TILES = tILES;
+		TILES = Tiles;
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e)
-	{
-		System.out.println(e);
-		
-	}
+	public void mouseClicked(MouseEvent e){}
 
 	@Override
-	public void mousePressed(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	public void mousePressed(MouseEvent e){}
 
 	@Override
-	public void mouseReleased(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseReleased(MouseEvent e){}
 
 	@Override
-	public void mouseEntered(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent e){}
 
 	@Override
-	public void mouseExited(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent e){}
 
 }
 
