@@ -35,7 +35,7 @@ public class MahJong extends JFrame implements WindowListener
 	@Override
 	public void windowOpened(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stud
 		
 	}
 
