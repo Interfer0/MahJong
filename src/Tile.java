@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.io.*;
+
 import javax.swing.JPanel;
 
 /*
@@ -22,6 +24,7 @@ public abstract class Tile extends JPanel implements Cloneable
 	private static int WIDTH = 65;
 	private static int HEIGHT = 75;
 	private static int DEPTH = 10;
+	private static JPanel selectedPanel; 
 	
 	private  Tile toL;
 	private  Tile toR;
@@ -61,7 +64,10 @@ public abstract class Tile extends JPanel implements Cloneable
 		GRAD3 = new GradientPaint(DEPTH / 2, 0, new Color(255, 255, 255), DEPTH, 0, new Color(200, 200, 200));
 		GRAD4 = new GradientPaint(DEPTH / 2, HEIGHT, new Color(255, 255, 255), WIDTH + DEPTH, HEIGHT + DEPTH / 2,
 				new Color(200, 200, 200));
-
+		selectedPanel = new JPanel();
+		selectedPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		selectedPanel.setBackground(new Color(100,0,0,60));
+		
 	}
 
 
@@ -75,8 +81,41 @@ public abstract class Tile extends JPanel implements Cloneable
 	@Override
 	public Object clone() throws CloneNotSupportedException
 	{
-		return super.clone();
-		
+		// to add the tile to the top and not have it have a selected box
+		// I need a deep copy. This serializes the old tile, and 
+		// unserializes it as a new object. 
+		// Code from http://www.javaworld.com/article/2077578/learn-java/java-tip-76--an-alternative-to-the-deep-copy-technique.html
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+		try {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			oos = new ObjectOutputStream(bos);
+			// serialize and pass the object
+			oos.writeObject(this);
+			oos.flush();
+			ByteArrayInputStream bin = new ByteArrayInputStream(bos.toByteArray());
+			ois = new ObjectInputStream(bin);
+			// return the new object
+			Tile rtn = (Tile) ois.readObject();
+			
+			return rtn; // G
+		} catch (Exception e) {
+			System.out.println("Exception in ObjectCloner = " + e);
+			try {
+				throw (e);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				oos.close();
+				ois.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return ois;
+
 	}
 
 	public Boolean matches(Tile other)
@@ -221,6 +260,16 @@ public abstract class Tile extends JPanel implements Cloneable
 			rtn += ("| Behind: " + toB.toString() );
 		return rtn;
 		
+	}
+	
+	public void setSelected() {
+		add(selectedPanel);
+		this.repaint();
+		
+	}
+	public void setUnselected() {
+		remove(selectedPanel);
+		this.repaint();
 	}
 	
 

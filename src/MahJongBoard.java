@@ -40,30 +40,31 @@ public class MahJongBoard extends JPanel implements MouseListener
 							Tile sT = (Tile)e.getSource();
 							if(sT.isPlayable())
 							{
-								
-								//set selected tile to showAsSelected
-								
 								//check if tile is null
 								for(int i = 0; i<= TILES.length -1 ; i++)
 									if(TILES[i] == sT)
 									{
 										if(mGUI.getTileOne() == null)
 										{
+											
 											mGUI.setTileOne(i);
+											//set selected tile to showAsSelected
+											sT.setSelected();
 										} else {
 											//check if tileOne and tileTwo match
 											if(TILES[mGUI.getTileOneIndex()].matches(sT))
 											{
+												//set tile visibility to false
 												TILES[mGUI.getTileOneIndex()].setVisible(false);
 												sT.setVisible(false);
 											
 											}
-											mGUI.resetTileOne();
+											//set both tiles to unselected;
+											TILES[mGUI.getTileOneIndex()].setUnselected();
+											sT.setUnselected();
+											mGUI.resetTileOne();	//reset Tile One to 0 if a match or not
 										}
 									}
-
-								
-								
 							}
 						}
 					}

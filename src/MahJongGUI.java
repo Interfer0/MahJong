@@ -32,7 +32,9 @@ public class MahJongGUI extends JPanel {
 		} catch (Exception e){
 			System.out.print("That didn't work");
 		}
-		System.out.println(tileOne + " is here");
+		tileOne.setUnselected();
+			(MahJongBoard.getTILES()[i]).setUnselected();
+		
 		this.add(tileOne);
 		this.repaint();
 		this.revalidate();
@@ -41,7 +43,6 @@ public class MahJongGUI extends JPanel {
 
 
 	public Tile getTileOne() {
-		// TODO Auto-generated method stub
 		return tileOne;
 	}
 
