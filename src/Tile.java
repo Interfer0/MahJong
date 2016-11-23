@@ -6,7 +6,7 @@ import javax.swing.JPanel;
  * CS3230
  * 11/10/16
  */
-public abstract class Tile extends JPanel
+public abstract class Tile extends JPanel implements Cloneable
 {
 
 	private static final long serialVersionUID = 1L;
@@ -72,11 +72,17 @@ public abstract class Tile extends JPanel
 		setPreferredSize(new Dimension(DEPTH + WIDTH + 1, DEPTH + HEIGHT + 1));
 		
 	}
+	@Override
+	public Object clone() throws CloneNotSupportedException
+	{
+		return super.clone();
+		
+	}
 
 	public Boolean matches(Tile other)
 	{
 		if (this == other)
-			return true;
+			return false;
 		if (other == null)
 			return false;
 		return getClass() == other.getClass();

@@ -5,6 +5,9 @@
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import javax.swing.*;
 
@@ -17,7 +20,7 @@ public class MahJongBoard extends JPanel implements MouseListener
 	private static Tile[] TILES = new Tile[144];
 	private static Image img;
 	
-	public MahJongBoard()
+	public MahJongBoard(MahJongGUI mGUI)
 	{
 		TILES = createTiles();
 		setPreferredSize(getSize());
@@ -34,12 +37,33 @@ public class MahJongBoard extends JPanel implements MouseListener
 						@Override
 						public void mouseClicked(MouseEvent e)
 						{
-							if(((Tile)e.getSource()).isPlayable())
-								((Tile)e.getSource()).setVisible(false);
-							//Update ToolTips Not needed in end game
-							for(Tile t : TILES)
+							Tile sT = (Tile)e.getSource();
+							if(sT.isPlayable())
 							{
-								t.setToolTipText(t.getNeighbors());
+								
+								//set selected tile to showAsSelected
+								
+								//check if tile is null
+								for(int i = 0; i<= TILES.length -1 ; i++)
+									if(TILES[i] == sT)
+									{
+										if(mGUI.getTileOne() == null)
+										{
+											mGUI.setTileOne(i);
+										} else {
+											//check if tileOne and tileTwo match
+											if(TILES[mGUI.getTileOneIndex()].matches(sT))
+											{
+												TILES[mGUI.getTileOneIndex()].setVisible(false);
+												sT.setVisible(false);
+											
+											}
+											mGUI.resetTileOne();
+										}
+									}
+
+								
+								
 							}
 						}
 					}
@@ -61,50 +85,55 @@ public class MahJongBoard extends JPanel implements MouseListener
 	private Tile[] createTiles()
 	{
 		int position = 0;
-		Tile[] rtn = new Tile[144];
+		ArrayList<Tile> rtn = new ArrayList<Tile>();
+		
 		// number tiles
 		for (int c = 0; c < 4; c++)
 		{
 			for (int i = 1; i < 10; i++)
 			{
-				rtn[position++] = new CharacterTile(Character.forDigit(i, 10));
+				rtn.add(new CharacterTile(Character.forDigit(i, 10)));
 			}
 			// Direction Tiles
-			rtn[position++] = new CharacterTile('N');
-			rtn[position++] = new CharacterTile('S');
-			rtn[position++] = new CharacterTile('E');
-			rtn[position++] = new CharacterTile('W');
+			rtn.add(new CharacterTile('N'));
+			rtn.add(new CharacterTile('S'));
+			rtn.add(new CharacterTile('E'));
+			rtn.add(new CharacterTile('W'));
 			// C tile
-			rtn[position++] = new CharacterTile('C');
+			rtn.add(new CharacterTile('C'));
 			// F tile
-			rtn[position++] = new CharacterTile('F');
+			rtn.add(new CharacterTile('F'));
 			// white Dragon
-			rtn[position++] = new WhiteDragonTile();
+			rtn.add(new WhiteDragonTile());
 			// circle tiles
 			for (int i = 1; i < 10; i++)
 			{
-				rtn[position++] = new CircleTile(i);
+				rtn.add(new CircleTile(i));
 			}
 			// Bamboo One
-			rtn[position++] = new Bamboo1Tile();
+			rtn.add(new Bamboo1Tile());
 			// Bamboo Tiles
 			for (int i = 2; i < 10; i++)
 			{
-				rtn[position++] = new BambooTile(i);
+				rtn.add(new BambooTile(i));
 			}
 		}
 		// picture Tiles
-		rtn[position++] = new FlowerTile("Chrysanthemum");
-		rtn[position++] = new FlowerTile("Orchid");
-		rtn[position++] = new FlowerTile("Plum");
-		rtn[position++] = new FlowerTile("Bamboo");
+		rtn.add(new FlowerTile("Chrysanthemum"));
+		rtn.add(new FlowerTile("Orchid"));
+		rtn.add(new FlowerTile("Plum"));
+		rtn.add(new FlowerTile("Bamboo"));
 
-		rtn[position++] = new SeasonTile("Spring");
-		rtn[position++] = new SeasonTile("Summer");
-		rtn[position++] = new SeasonTile("Fall");
-		rtn[position++] = new SeasonTile("Winter");
-
-		return rtn;
+		rtn.add(new SeasonTile("Spring"));
+		rtn.add(new SeasonTile("Summer"));
+		rtn.add(new SeasonTile("Fall"));
+		rtn.add(new SeasonTile("Winter"));
+		Collections.shuffle(rtn);
+		Tile[] myReturn= new Tile[144];
+		int i = 0;
+		for(Tile t : rtn)
+			myReturn[i++] = t;
+		return myReturn;
 	}
 	
 	//Tile List

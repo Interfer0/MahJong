@@ -31,9 +31,9 @@ public class MahJong extends JFrame implements WindowListener
 		setResizable(false);
 		
 		
-		
-		add(new MahJongGUI(this.getWidth()));
-		add(new MahJongBoard());
+		MahJongGUI mGUI = new MahJongGUI(this.getWidth());
+		add(mGUI);
+		add(new MahJongBoard(mGUI));
 		
 		setVisible(true);
 	}
