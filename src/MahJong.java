@@ -3,12 +3,17 @@
  * CS3230
  * 11/21/16
  */
+import java.awt.Button;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class MahJong extends JFrame implements WindowListener
 {
@@ -22,9 +27,14 @@ public class MahJong extends JFrame implements WindowListener
 		this.setIconImage(img);
 		this.setTitle("MahJong");
 		this.setBackground(new Color(11, 112, 15));
-		setSize(1100, 1000);
+		setSize(1200, 800);
 		setResizable(false);
+		
+		
+		
+		add(new MahJongGUI(this.getWidth()));
 		add(new MahJongBoard());
+		
 		setVisible(true);
 	}
 	

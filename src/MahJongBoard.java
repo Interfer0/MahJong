@@ -34,7 +34,8 @@ public class MahJongBoard extends JPanel implements MouseListener
 						@Override
 						public void mouseClicked(MouseEvent e)
 						{
-							((Tile)e.getSource()).setVisible(false);
+							if(((Tile)e.getSource()).isPlayable())
+								((Tile)e.getSource()).setVisible(false);
 							//Update ToolTips Not needed in end game
 							for(Tile t : TILES)
 							{

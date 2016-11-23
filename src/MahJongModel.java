@@ -289,7 +289,8 @@ public class MahJongModel implements LayoutManager
 						MahJongBoard.getTILES()[tileNumber].setToL(MahJongBoard.getTILES()[0]);
 						
 					}
-					
+					if(tileNumber == 99 || tileNumber == 111)
+						MahJongBoard.getTILES()[tileNumber].setToR(MahJongBoard.getTILES()[142]);
 				}
 				
 				

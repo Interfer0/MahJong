@@ -145,8 +145,12 @@ public abstract class Tile extends JPanel
 	
 	public boolean isPlayable()
 	{
-		if(((toR != null || !toR.isVisible())|| (toL != null || !toL.isVisible()) || (toB != null || !toB.isVisible())))
-				return false;
+		if(((toL != null && toL.isVisible()||toL2 != null && toL2.isVisible()) && 
+				(toR != null && toR.isVisible() || toR2 != null && toR2.isVisible())) ||
+				toB != null && toB.isVisible()
+				)
+			return false;
+		
 		return true;
 	}
 
