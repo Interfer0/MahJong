@@ -95,7 +95,7 @@ public class MahJongModel implements LayoutManager
 				}
 				
 				// layer 2
-				if (i > 1 && i <=6) 
+				if (i > 1 && i <6) 
 				{
 					MahJongBoard.getTILES()[tileNumber].setToB(MahJongBoard.getTILES()[1]);
 					if(i == 2)

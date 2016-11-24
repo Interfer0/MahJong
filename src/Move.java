@@ -1,16 +1,46 @@
 import javax.swing.JPanel;
 
 public class Move extends JPanel {
-		private Tile myTile;
-		private int fromTile;
-		private MahJongGUI mah;
+	
+		private MahJongGUI mGUI;
+		private int tileOne;
+		private int tileTwo;
 		
-		public Move(MahJongGUI mah,int fromTile)
-		{
-			
+
+		public Move(MahJongGUI mGUI, int tileOne, int tileTwo) {
+			this.setmGUI(mGUI);
+			this.setTileOne(tileOne);
+			this.setTileTwo(tileTwo);
+		}
+		
+
+		public int getTileTwo() {
+			return tileTwo;
+		}
+		
+		public void setTileTwo(int tileTwo) {
+			this.tileTwo = tileTwo;
 		}
 
-		public  Tile getMyTile() {
-			return myTile;
+
+		public int getTileOne() {
+			return tileOne;
 		}
+
+
+		public void setTileOne(int tileOne) {
+			this.tileOne = tileOne;
+		}
+
+
+		public MahJongGUI getmGUI() {
+			return mGUI;
+		}
+
+
+		public void setmGUI(MahJongGUI mGUI) {
+			this.mGUI = mGUI;
+		}
+
+		
 }

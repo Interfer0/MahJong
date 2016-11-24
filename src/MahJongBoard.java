@@ -5,9 +5,7 @@
  */
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 import javax.swing.*;
 
@@ -20,6 +18,7 @@ public class MahJongBoard extends JPanel implements MouseListener
 	private static Tile[] TILES = new Tile[144];
 	private static Image img;
 	private static MahJongGUI mGUI;
+	private Stack<Move> myMoves = new Stack();
 	
 	public MahJongBoard(MahJongGUI mGUI)
 	{
@@ -59,7 +58,10 @@ public class MahJongBoard extends JPanel implements MouseListener
 												//set tile visibility to false
 												TILES[mGUI.getTileOneIndex()].setVisible(false);
 												sT.setVisible(false);
-												Move move = new Move(mGUI,i);
+												Move move = new Move(mGUI, i,mGUI.getTileOneIndex() );
+												mGUI.addMove(move);
+												myMoves.push(move);
+												
 											}
 											//set both tiles to unselected;
 											TILES[mGUI.getTileOneIndex()].setUnselected();
@@ -69,8 +71,7 @@ public class MahJongBoard extends JPanel implements MouseListener
 									}
 							}
 						}
-					}
-					);
+					});
 		}
 		addMouseListener(this);
 		setVisible(true);
@@ -154,8 +155,8 @@ public class MahJongBoard extends JPanel implements MouseListener
 	// Reset the selected tile if the board is clicked
 	@Override
 	public void mouseClicked(MouseEvent e){
-		TILES[mGUI.getTileOneIndex()].setUnselected();
-		mGUI.resetTileOne();
+		//TILES[mGUI.getTileOneIndex()].setUnselected();
+		//mGUI.resetTileOne();
 	}
 
 	@Override

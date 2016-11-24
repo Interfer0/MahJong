@@ -262,6 +262,23 @@ public abstract class Tile extends JPanel implements Cloneable
 		
 	}
 	
+	public Tile getTile(int i)
+	{
+		return MahJongBoard.getTILES()[i];
+		
+	}
+	
+	public static Tile getTileClone(int i)
+	{
+		try {
+			return (Tile) MahJongBoard.getTILES()[i].clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public void setSelected() {
 		add(selectedPanel);
 		this.repaint();
