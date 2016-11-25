@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
 
 public class MahJongGUI extends JPanel {
 	private Tile tileOne;
@@ -27,9 +28,20 @@ public class MahJongGUI extends JPanel {
 		playedTiles = new JPanel();
 		playedTiles.setLayout(new FlowLayout(FlowLayout.LEFT));
 		playedTiles.setBackground(Color.YELLOW);
+		//playedTiles.getLayout().
+		//add(playedTiles);
 		
 		tilesScrollPane = new JScrollPane(playedTiles);
 		tilesScrollPane.setPreferredSize(new Dimension(800,95));
+		JScrollBar jsb = new JScrollBar();
+		jsb.setBackground(Color.GREEN);
+		jsb.setOrientation(JScrollBar.HORIZONTAL);
+		jsb.setPreferredSize(new Dimension(800,10));
+		tilesScrollPane.setHorizontalScrollBar(jsb);
+		tilesScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		tilesScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		tilesScrollPane.setAutoscrolls(true);
+		
 		add(tilesScrollPane);
 		
 	}
@@ -74,8 +86,16 @@ public class MahJongGUI extends JPanel {
 	
 	public void addMove(Move move)
 	{
-		playedTiles.add(Tile.getTileClone(move.getTileOne()));
-		playedTiles.add(Tile.getTileClone(move.getTileTwo()));
+		MahJongBoard.getTILES()[move.getTileOne()].setUnselected();
+		Tile t1 = Tile.getTileClone(move.getTileOne());
+		t1.setUnselected();
+		t1.setVisible(true);
+		playedTiles.add(t1);
+		MahJongBoard.getTILES()[move.getTileTwo()].setUnselected();
+		Tile t2 = Tile.getTileClone(move.getTileTwo());
+		t2.setUnselected();
+		t2.setVisible(true);
+		playedTiles.add(t2);
 		playedTiles.repaint();
 		playedTiles.revalidate();
 		tilesScrollPane.repaint();

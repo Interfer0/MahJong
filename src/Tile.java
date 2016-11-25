@@ -21,8 +21,8 @@ public abstract class Tile extends JPanel implements Cloneable
 	static GradientPaint GRAD2;
 	static GradientPaint GRAD3;
 	static GradientPaint GRAD4;
-	private static int WIDTH = 65;
-	private static int HEIGHT = 75;
+	private static int WIDTH = 60;
+	private static int HEIGHT = 70;
 	private static int DEPTH = 10;
 	private static JPanel selectedPanel; 
 	

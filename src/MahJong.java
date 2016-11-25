@@ -6,6 +6,7 @@
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.WindowEvent;
@@ -27,14 +28,17 @@ public class MahJong extends JFrame implements WindowListener
 		this.setIconImage(img);
 		this.setTitle("MahJong");
 		this.setBackground(new Color(11, 112, 15));
-		setSize(1200, 800);
+		setSize(1100, 750);
 		setResizable(false);
 		
-		
+		//this.setLayout(new FlowLayout());
 		MahJongGUI mGUI = new MahJongGUI(this.getWidth());
+		mGUI.setPreferredSize(new Dimension(1100,100));
 		add(mGUI);
-		add(new MahJongBoard(mGUI));
-		
+		MahJongBoard mah = new MahJongBoard(mGUI);
+		mah.setPreferredSize(new Dimension(1100,600));
+		add(mah);
+		//pack();
 		setVisible(true);
 	}
 	
