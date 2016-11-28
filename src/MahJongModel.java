@@ -13,7 +13,18 @@ public class MahJongModel implements LayoutManager
 	private boolean sizeUnknown = true;
 	private static int counter = 0;
 	private static int tileNumber  = 0;
+	private static int offset = 20;
+	
+	public static int getCounter() {return counter;}
 
+	public static void setCounter(int counter) {MahJongModel.counter = counter;}
+
+	public static int getTileNumber() {return tileNumber;}
+
+	public static void setTileNumber(int tileNumber) {MahJongModel.tileNumber = tileNumber;}
+
+	
+	
 	@Override
 	public void addLayoutComponent(String name, Component comp){}
 
@@ -66,7 +77,7 @@ public class MahJongModel implements LayoutManager
 		int previousWidth = 0;
 		int previousHeight = 0;
 		int x = parent.getWidth()/2-7*Tile.getWIDTH()-3*Tile.getDEPTH();
-		int y = parent.getHeight()/2-2*Tile.getDEPTH();
+		int y = offset + parent.getHeight()/2-Tile.getDEPTH();
 
 		if (sizeUnknown)
 		{
@@ -91,7 +102,7 @@ public class MahJongModel implements LayoutManager
 				if(i == 1)	//Tippytop tile
 				{	
 					x = parent.getWidth()/2-Tile.getWIDTH()/2; 
-					y = parent.getHeight()/2-2*Tile.getHEIGHT()/2;
+					y = 3*offset + parent.getHeight()/2-2*Tile.getHEIGHT()/2;
 				}
 				
 				// layer 2
@@ -103,7 +114,7 @@ public class MahJongModel implements LayoutManager
 						MahJongBoard.getTILES()[tileNumber].setToR(MahJongBoard.getTILES()[tileNumber +1]);
 						counter = 0;
 						x = parent.getWidth()/2-Tile.getWIDTH();
-						y = parent.getHeight()/2-Tile.getHEIGHT()/2;
+						y = 3*offset + parent.getHeight()/2-Tile.getHEIGHT()/2;
 					} else {
 						
 						x += previousWidth - Tile.getDEPTH();
@@ -125,7 +136,7 @@ public class MahJongModel implements LayoutManager
 					{
 						MahJongBoard.getTILES()[tileNumber].setToR(MahJongBoard.getTILES()[tileNumber +1]);
 						x = parent.getWidth()/2-2*Tile.getWIDTH()-Tile.getDEPTH();
-						y = parent.getHeight()/2+Tile.getHEIGHT()+Tile.getDEPTH();
+						y = offset + parent.getHeight()/2+Tile.getHEIGHT()+Tile.getDEPTH();
 						counter = 0;
 					} else {
 						
@@ -156,7 +167,7 @@ public class MahJongModel implements LayoutManager
 					{
 						MahJongBoard.getTILES()[tileNumber].setToR(MahJongBoard.getTILES()[tileNumber +1]);
 						x = parent.getWidth()/2-3*Tile.getWIDTH()-2*Tile.getDEPTH();
-						y = parent.getHeight()/2+2*Tile.getHEIGHT()+2*Tile.getDEPTH();
+						y = offset + parent.getHeight()/2+2*Tile.getHEIGHT()+2*Tile.getDEPTH();
 						counter = 0;
 					} else {
 						
@@ -192,7 +203,7 @@ public class MahJongModel implements LayoutManager
 					{
 						MahJongBoard.getTILES()[tileNumber].setToR(MahJongBoard.getTILES()[tileNumber +1]);
 						x = parent.getWidth()/2-6*Tile.getWIDTH()-3*Tile.getDEPTH();
-						y = parent.getHeight()/2+3*Tile.getHEIGHT()+3*Tile.getDEPTH();
+						y = offset + parent.getHeight()/2+3*Tile.getHEIGHT()+3*Tile.getDEPTH();
 						counter = 0;
 					} else {
 						switch(counter)
@@ -244,7 +255,7 @@ public class MahJongModel implements LayoutManager
 							MahJongBoard.getTILES()[tileNumber].setToL(MahJongBoard.getTILES()[99]);
 							MahJongBoard.getTILES()[tileNumber].setToL2(MahJongBoard.getTILES()[111]);
 							x = parent.getWidth()/2+5*Tile.getWIDTH()-2*Tile.getDEPTH();
-							y = parent.getHeight()/2-2*Tile.getDEPTH();
+							y = offset + parent.getHeight()/2-Tile.getDEPTH();
 							counter++;
 						default: 
 							if(tileNumber != 142)

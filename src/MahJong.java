@@ -1,103 +1,80 @@
+
 /*
  * Daniel Bigelow
  * CS3230
  * 11/21/16
  */
-import java.awt.Button;
+
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+
 import java.awt.Image;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.*;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
-public class MahJong extends JFrame implements WindowListener
-{
-	
+public class MahJong extends JFrame implements WindowListener {
+
 	private static final long serialVersionUID = 1L;
+	private static MahJongBoard MAH;
+	private int gameNumber;
+	
+	
+	
+	//WindowEvents
+	public void windowClosing(WindowEvent e){System.exit(0);}
+	public void windowOpened(WindowEvent e){}
+	public void windowClosed(WindowEvent e){}
+	public void windowIconified(WindowEvent e){}
+	public void windowDeiconified(WindowEvent e){}
+	public void windowActivated(WindowEvent e){}
+	public void windowDeactivated(WindowEvent e){}
 
-	public MahJong()
-	{
+
+
+	public MahJong() {
+		Random rnd = new Random();
+		this.gameNumber = Math.abs(rnd.nextInt());
+		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		Image img = getToolkit().getImage(getClass().getResource("images/B.png"));
 		this.setIconImage(img);
-		this.setTitle("MahJong");
+		this.setTitle("MahJong - " + this.gameNumber);
 		this.setBackground(new Color(11, 112, 15));
 		setSize(1100, 750);
 		setResizable(false);
-		
-		//this.setLayout(new FlowLayout());
 		MahJongGUI mGUI = new MahJongGUI(this.getWidth());
-		mGUI.setPreferredSize(new Dimension(1100,100));
+		mGUI.setPreferredSize(new Dimension(1100, 100));
 		add(mGUI);
-		MahJongBoard mah = new MahJongBoard(mGUI);
-		mah.setPreferredSize(new Dimension(1100,600));
-		add(mah);
-		//pack();
+		MAH = new MahJongBoard(gameNumber);
+		MAH.setPreferredSize(new Dimension(1100, 600));
+		add(MAH);
 		setVisible(true);
 	}
 	
-	
+	public static MahJongBoard getMAH(){return MAH;}
 
-	public static void main(String[] args) 
-	{
-		new MahJong();
-		
+	public static void setMAH(MahJongBoard mAH) {MAH = mAH;}
 
+
+	public void newGame(int gameNumber) {
+		this.gameNumber = gameNumber;
+		this.setTitle("MahJong - " + this.gameNumber);
+		remove(MAH);
+		MAH = new MahJongBoard(gameNumber);
+		MAH.setPreferredSize(new Dimension(1100, 600));
+		add(MAH);
+		repaint();
+		revalidate();
 	}
 
-	@Override
-	public void windowOpened(WindowEvent e)
-	{
-		// TODO Auto-generated method stud
-		
+	public int getGameNumber() {
+		return gameNumber;
 	}
-
-	@Override
-	public void windowClosing(WindowEvent e)
-	{
-		System.exit(0);
-		
+	public void setGameNumber(int gameNumber) {
+		this.gameNumber = gameNumber;
 	}
-
-	@Override
-	public void windowClosed(WindowEvent e)
-	{
-		
-		
-	}
-
-	@Override
-	public void windowIconified(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowDeiconified(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowActivated(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
+	public static void main(String[] args) {new MahJong();}
 }

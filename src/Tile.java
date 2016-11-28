@@ -217,50 +217,50 @@ public abstract class Tile extends JPanel implements Cloneable
 	public void setToR(Tile toR)
 	{
 		this.toR = toR;
-		setToolTipText(getNeighbors());
+		//setToolTipText(getNeighbors());
 	}
 	
 	public void setToR2(Tile toR2)
 	{
 		this.toR2 = toR2;
-		setToolTipText(getNeighbors());
+		//setToolTipText(getNeighbors());
 	}
 
 	public void setToL(Tile toL)
 	{
 		this.toL = toL;
-		setToolTipText(getNeighbors());
+		//setToolTipText(getNeighbors());
 	}
 	public void setToL2(Tile toL2)
 	{
 		this.toL2 = toL2;
-		setToolTipText(getNeighbors());
+		//setToolTipText(getNeighbors());
 		
 	}
 
 	public void setToB(Tile toB)
 	{
 		this.toB = toB;
-		setToolTipText(getNeighbors());
+		//setToolTipText(getNeighbors());
 		
 	}
 	
-	public String getNeighbors()
-	{
-		String rtn = "";
-		if(toL != null && toL.isVisible())
-			rtn += ("| Left: " + toL.toString() );
-		if(toL2 != null && toL2.isVisible())
-			rtn += ("| Left2: " + toL2.toString() );
-		if(toR != null && toR.isVisible())
-			rtn += ("| Right: " + toR.toString() );
-		if(toR2 != null && toR2.isVisible())
-			rtn += ("| Right2: " + toR2.toString() );
-		if(toB != null && toB.isVisible())
-			rtn += ("| Behind: " + toB.toString() );
-		return rtn;
-		
-	}
+//	public String getNeighbors()
+//	{
+//		String rtn = "";
+//		if(toL != null && toL.isVisible())
+//			rtn += ("| Left: " + toL.toString() );
+//		if(toL2 != null && toL2.isVisible())
+//			rtn += ("| Left2: " + toL2.toString() );
+//		if(toR != null && toR.isVisible())
+//			rtn += ("| Right: " + toR.toString() );
+//		if(toR2 != null && toR2.isVisible())
+//			rtn += ("| Right2: " + toR2.toString() );
+//		if(toB != null && toB.isVisible())
+//			rtn += ("| Behind: " + toB.toString() );
+//		return rtn;
+//		
+//	}
 	
 	public Tile getTile(int i)
 	{

@@ -1,79 +1,115 @@
 
-
 import java.awt.*;
-import java.util.ArrayList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Random;
 
 import javax.swing.*;
-import javax.swing.text.DefaultCaret;
 
 public class MahJongGUI extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Tile tileOne;
 	private int tileOneIndex;
 	private JPanel buttons;
-	private JPanel selected;
+
 	private JPanel playedTiles;
 	private JScrollPane tilesScrollPane;
-	
-
+	private static MahJongGUI MGUI;
 
 	public MahJongGUI(int width) {
-		setBounds(0, 0, width, 100);
+		
+		MahJongGUI.setMGUI(this);
+		this.setBackground(new Color(11, 112, 15));
+		setBounds(0, 0, width, 110);
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
-		
+
+		Button undoButton = new Button("Undo");
+		undoButton.setPreferredSize(new Dimension(190, 40));
+		undoButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MahJongGUI.MGUI.removeMove();
+			}
+		});
+
+		Button newGame = new Button("New Game");
+		newGame.setPreferredSize(new Dimension(190, 20));
+		newGame.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Random rnd = new Random();
+				MahJongGUI.MGUI.newGame(Math.abs(rnd.nextInt()));
+			}
+		});
+
+		Button playAgain = new Button("Play This Board Again");
+		playAgain.setPreferredSize(new Dimension(190, 20));
+		playAgain.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MahJongGUI.MGUI.newGame(
+						((MahJong)getRootPane().getParent()).getGameNumber()
+						);
+			}
+		});
+
 		buttons = new JPanel();
-		buttons.setBackground(Color.BLACK);
-		buttons.setPreferredSize(new Dimension(200,90));
+		buttons.setBackground(new Color(11, 112, 15));
+		buttons.setPreferredSize(new Dimension(200, 100));
+
+		buttons.add(newGame);
+		buttons.add(playAgain);
+		buttons.add(undoButton);
+
 		add(buttons);
-		
+
 		playedTiles = new JPanel();
 		playedTiles.setLayout(new FlowLayout(FlowLayout.LEFT));
-		playedTiles.setBackground(Color.YELLOW);
-		//playedTiles.getLayout().
-		//add(playedTiles);
-		
+		playedTiles.setBackground(new Color(11, 112, 15));
+
 		tilesScrollPane = new JScrollPane(playedTiles);
-		tilesScrollPane.setPreferredSize(new Dimension(800,95));
+		tilesScrollPane.setPreferredSize(new Dimension(800, 100));
 		JScrollBar jsb = new JScrollBar();
-		jsb.setBackground(Color.GREEN);
+		jsb.setBackground(new Color(11, 112, 45));
+		jsb.setForeground(new Color(11, 112, 45));
 		jsb.setOrientation(JScrollBar.HORIZONTAL);
-		jsb.setPreferredSize(new Dimension(800,10));
+		jsb.setPreferredSize(new Dimension(800, 10));
 		tilesScrollPane.setHorizontalScrollBar(jsb);
 		tilesScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		tilesScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
 		tilesScrollPane.setAutoscrolls(true);
-		
+
 		add(tilesScrollPane);
-		
-	}
-	
-	public int getTileOneIndex() {
-		return tileOneIndex;
 	}
 
-
-	public void setTileOneIndex(int tileOneIndex) {
-		this.tileOneIndex = tileOneIndex;
+	protected void newGame(int gameNumber) {
+		((MahJong)getRootPane().getParent()).newGame(gameNumber);
+		setupGUI();
 	}
 
+	private void setupGUI() {
+		playedTiles.removeAll();
+		playedTiles.repaint();
+		playedTiles.revalidate();
+	}
 
 	public void setTileOne(int i) {
 		tileOneIndex = i;
-		try{
-		tileOne = (Tile) MahJongBoard.getTILES()[tileOneIndex].clone();
-		} catch (Exception e){
+		try {
+			tileOne = (Tile) MahJongBoard.getTILES()[tileOneIndex].clone();
+		} catch (Exception e) {
 			System.out.print("That didn't work");
 		}
 		tileOne.setUnselected();
-			(MahJongBoard.getTILES()[tileOneIndex]).setUnselected();
+		(MahJongBoard.getTILES()[tileOneIndex]).setUnselected();
 		this.add(tileOne, BorderLayout.LINE_START);
-		//this.add(new Button("test"), BorderLayout.LINE_END);
 		this.repaint();
 		this.revalidate();
-		
-	}
-	
-	public Tile getTileOne() {
-		return tileOne;
+
 	}
 
 	public void resetTileOne() {
@@ -84,30 +120,15 @@ public class MahJongGUI extends JPanel {
 		this.revalidate();
 	}
 	
-	public void addMove(Move move)
-	{
-		MahJongBoard.getTILES()[move.getTileOne()].setUnselected();
-		Tile t1 = Tile.getTileClone(move.getTileOne());
-		t1.setUnselected();
-		t1.setVisible(true);
-		playedTiles.add(t1);
-		MahJongBoard.getTILES()[move.getTileTwo()].setUnselected();
-		Tile t2 = Tile.getTileClone(move.getTileTwo());
-		t2.setUnselected();
-		t2.setVisible(true);
-		playedTiles.add(t2);
-		playedTiles.repaint();
-		playedTiles.revalidate();
-		tilesScrollPane.repaint();
-		tilesScrollPane.revalidate();
-		
+	public void setTileOneIndex(int tileOneIndex) {
+		this.tileOneIndex = tileOneIndex;
 	}
 	
-	public void removeMove()
-	{
-		playedTiles.remove(playedTiles.getComponentCount());
-		playedTiles.remove(playedTiles.getComponentCount());
-	}
-	
-	
+	public int getTileOneIndex(){return tileOneIndex;}
+	public Tile getTileOne(){return tileOne;}
+	public void addMove(Move move){Move.addMove(move, playedTiles);}
+	public void removeMove(){Move.removeMove(playedTiles);}
+	public static MahJongGUI getMGUI(){return MGUI;}
+	public static void setMGUI(MahJongGUI mGUI){MGUI = mGUI;}
+
 }

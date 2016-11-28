@@ -21,17 +21,15 @@ public class MahJongBoard extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
 	private static Tile[] TILES = new Tile[144];
 	private static Image img;
-	private static MahJongGUI mGUI;
-	private Stack<Move> myMoves = new Stack();
 
-	public MahJongBoard(MahJongGUI mGUI) {
-		this.mGUI = mGUI;
-		TILES = createTiles();
-		//setSize(1200, 600);
-		//setPreferredSize(new Dimension(1200,600));
+	public MahJongBoard(int gameNumber) {
+		
+		TILES = createTiles(gameNumber);
+		
 		this.setBackground(new Color(11, 112, 15));
 		MahJongModel model = new MahJongModel(); // Custom layout Model
-		
+		MahJongModel.setTileNumber(0);
+		MahJongModel.setCounter(0);
 		model.preferredLayoutSize(this);
 		this.setLayout(model);
 		for (Tile t : TILES) {
@@ -44,31 +42,30 @@ public class MahJongBoard extends JPanel implements MouseListener {
 						// check if tile is null
 						for (int i = 0; i <= TILES.length - 1; i++)
 							if (TILES[i] == sT) {
-								if (mGUI.getTileOne() == null) {
-									mGUI.setTileOne(i);
+								if (MahJongGUI.getMGUI().getTileOne() == null) {
+									MahJongGUI.getMGUI().setTileOne(i);
 									// set selected tile to showAsSelected
 									sT.setSelected();
 								} else {
 									// check if tileOne and tileTwo match
-									if (TILES[mGUI.getTileOneIndex()].matches(sT)) {
+									if (TILES[MahJongGUI.getMGUI().getTileOneIndex()].matches(sT)) {
 										// set tile visibility to false
-										TILES[mGUI.getTileOneIndex()].setVisible(false);
+										TILES[MahJongGUI.getMGUI().getTileOneIndex()].setVisible(false);
 										sT.setVisible(false);
-										Move move = new Move(mGUI, i, mGUI.getTileOneIndex());
-										mGUI.addMove(move);
-										myMoves.push(move);
-										//sT.setUnselected();
-										//mGUI.resetTileOne();
+										Move move = new Move(i, MahJongGUI.getMGUI().getTileOneIndex());
+										MahJongGUI.getMGUI().addMove(move);
+
 									}
 									// set both tiles to unselected;
-									TILES[mGUI.getTileOneIndex()].setUnselected();
+									TILES[MahJongGUI.getMGUI().getTileOneIndex()].setUnselected();
 									sT.setUnselected();
-									mGUI.resetTileOne(); // reset Tile One to 0
+									MahJongGUI.getMGUI().resetTileOne(); // reset TileOne to 0 in GUI
 															// if a match or not
 								}
 							}
 					}
 				}
+
 			});
 		}
 		addMouseListener(this);
@@ -80,13 +77,12 @@ public class MahJongBoard extends JPanel implements MouseListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		img = getToolkit().getImage(getClass().getResource("images/Dragon.png"));
-		g.drawImage(img, this.getWidth() / 2 - img.getWidth(this) / 2, this.getHeight() / 2 - img.getHeight(this) / 2,
+		g.drawImage(img, this.getWidth() / 2 - img.getWidth(this) / 2, 40+ this.getHeight() / 2 - img.getHeight(this) / 2,
 				this);
 	}
 
 	// create 144 tiles and return them in a array
-	private Tile[] createTiles() {
-		int position = 0;
+	private Tile[] createTiles(int gameNumber) {
 		ArrayList<Tile> rtn = new ArrayList<Tile>();
 		// number tiles
 		for (int c = 0; c < 4; c++) {
@@ -124,7 +120,7 @@ public class MahJongBoard extends JPanel implements MouseListener {
 		rtn.add(new SeasonTile("Summer"));
 		rtn.add(new SeasonTile("Fall"));
 		rtn.add(new SeasonTile("Winter"));
-		Collections.shuffle(rtn);
+		Collections.shuffle(rtn,new Random(gameNumber));
 		Tile[] myReturn = new Tile[144];
 		int i = 0;
 		for (Tile t : rtn)
