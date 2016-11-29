@@ -124,6 +124,8 @@ public class MahJong extends JFrame implements WindowListener {
 		menuBar.add(move);
 		menuBar.add(help);
 		
+		
+		
 		setVisible(true);
 	}
 	
@@ -141,8 +143,8 @@ public class MahJong extends JFrame implements WindowListener {
 		add(MAH);
 		repaint();
 		revalidate();
-		//getJMenuBar().repaint();
-		//getJMenuBar().revalidate();
+		MahJongGUI.getMGUI().repaint();
+		MahJongGUI.getMGUI().revalidate();
 	}
 
 	public int getGameNumber() {
