@@ -80,9 +80,6 @@ public class MahJongGUI extends JPanel {
 		tilesScrollPane.setHorizontalScrollBar(jsb);
 		tilesScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		tilesScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-		tilesScrollPane.setAutoscrolls(true);
-
 		add(tilesScrollPane);
 	}
 
@@ -113,11 +110,14 @@ public class MahJongGUI extends JPanel {
 	}
 
 	public void resetTileOne() {
-		this.remove(tileOne);
-		tileOne = null;
-		tileOneIndex = -1;
-		this.repaint();
-		this.revalidate();
+		
+			this.remove(tileOne);
+			tileOne = null;
+			tileOneIndex = -1;
+			this.repaint();
+			this.revalidate();
+		
+		
 	}
 	
 	public void setTileOneIndex(int tileOneIndex) {
