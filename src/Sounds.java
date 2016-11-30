@@ -66,7 +66,7 @@ public class Sounds {
 			}
 	}
 
-	public static Boolean getSoundon() {
+	public static Boolean getSoundon() { 
 		return soundon;
 	}
 

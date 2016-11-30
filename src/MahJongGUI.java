@@ -115,7 +115,7 @@ public class MahJongGUI extends JPanel {
 			tileOne = null;
 			tileOneIndex = -1;
 			this.repaint();
-			this.revalidate();
+			this.revalidate(); 
 		
 		
 	}
