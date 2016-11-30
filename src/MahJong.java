@@ -156,7 +156,7 @@ public class MahJong extends JFrame implements WindowListener {
 		});
 
 		help.add(helpOperation); // todo
-		help.add(helpRules); // todo
+		help.add(helpRules); // todo 
 
 		menuBar.add(game);
 		menuBar.add(sound);
