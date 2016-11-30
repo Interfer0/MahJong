@@ -47,6 +47,9 @@ public class MahJongBoard extends JPanel implements MouseListener {
 		addMouseListener(this);
 		setVisible(true);
 		this.repaint();
+		Fireworks fire = new Fireworks();
+		//ThreadGroup	group = new ThreadGroup("Fireworks");
+		new Thread(fire).start();
 	}
 
 	// paint the background

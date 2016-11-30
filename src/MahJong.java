@@ -162,8 +162,11 @@ public class MahJong extends JFrame implements WindowListener {
 		menuBar.add(sound);
 		menuBar.add(move);
 		menuBar.add(help);
-
+		
 		setVisible(true);
+		
+		
+		
 	}
 
 	public static MahJongBoard getMAH() {
