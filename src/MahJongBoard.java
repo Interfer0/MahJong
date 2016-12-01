@@ -11,6 +11,7 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.reflect.GenericArrayType;
 import java.util.*;
 import javax.swing.*;
 
@@ -22,9 +23,10 @@ public class MahJongBoard extends JPanel implements MouseListener {
 	private static Tile[] TILES = new Tile[144];
 	private static Image img;
 	private static Sounds sound = new Sounds();
+	private static Fireworks fire;
 
 	public MahJongBoard(int gameNumber) {
-
+		fire = new Fireworks(this);
 		TILES = createTiles(gameNumber);
 
 		this.setBackground(new Color(11, 112, 15));
@@ -47,9 +49,8 @@ public class MahJongBoard extends JPanel implements MouseListener {
 		addMouseListener(this);
 		setVisible(true);
 		this.repaint();
-		Fireworks fire = new Fireworks();
-		//ThreadGroup	group = new ThreadGroup("Fireworks");
-		new Thread(fire).start();
+
+	
 	}
 
 	// paint the background
@@ -117,6 +118,7 @@ public class MahJongBoard extends JPanel implements MouseListener {
 	}
 
 	public static void playClick(Tile sT) {
+		
 		if (sT.isPlayable()) {
 			// check if tile is null
 			for (int i = 0; i <= TILES.length - 1; i++) {
@@ -135,6 +137,14 @@ public class MahJongBoard extends JPanel implements MouseListener {
 							Move move = new Move(i, MahJongGUI.getMGUI().getTileOneIndex());
 							MahJongGUI.getMGUI().addMove(move);
 							sound.doubleClick();
+							
+							//if(Move.getMyMoves().size() == 144)
+							//{
+								System.out.println(sT.getParent().getParent());
+								fire.setExplosions(0, 1000);
+								fire.fire(MahJong.getWIDTH(),MahJong.getHEIGHT());
+								
+							//}
 						} else {
 							sound.noMatchClick();
 						}

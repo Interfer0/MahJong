@@ -20,10 +20,20 @@ public class MahJong extends JFrame implements WindowListener {
 	private static MahJongBoard MAH;
 	private int gameNumber;
 	private JMenuBar menuBar;
+	private static int WIDTH = 1100;
+	private static int HEIGHT = 750;
+
+
+	public static int getWIDTH() {
+		return WIDTH;
+	}
+
+	public static int getHEIGHT() {
+		return HEIGHT;
+	}
 
 	// WindowEvents
 	public void windowClosing(WindowEvent e) {
-		System.out.println("here");
 	}
 
 	public void windowOpened(WindowEvent e) {
@@ -45,6 +55,7 @@ public class MahJong extends JFrame implements WindowListener {
 	}
 
 	public MahJong() {
+		
 		//handle window closing request
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter()
@@ -64,7 +75,7 @@ public class MahJong extends JFrame implements WindowListener {
 		this.setIconImage(img);
 		this.setTitle("MahJong - " + this.gameNumber);
 		this.setBackground(new Color(11, 112, 15));
-		setSize(1100, 750);
+		setSize(WIDTH, HEIGHT);
 		setResizable(false);
 
 		MahJongGUI mGUI = new MahJongGUI(this.getWidth());
@@ -163,6 +174,7 @@ public class MahJong extends JFrame implements WindowListener {
 		menuBar.add(move);
 		menuBar.add(help);
 		
+	
 		setVisible(true);
 		
 		
