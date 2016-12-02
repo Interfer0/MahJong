@@ -43,9 +43,10 @@ public class MahJongGUI extends JPanel {
 		newGame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Random rnd = new Random();
-				MahJongGUI.MGUI.newGame(Math.abs(rnd.nextInt()));
-
+				if (JOptionPane.showConfirmDialog(getRootPane(), "Are You Sure?") == 0) {
+					Random rnd = new Random();
+					MahJongGUI.getMGUI().newGame(Math.abs(rnd.nextInt()));
+				}
 			}
 		});
 
@@ -54,9 +55,9 @@ public class MahJongGUI extends JPanel {
 		playAgain.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MahJongGUI.MGUI.newGame(
-						((MahJong)getRootPane().getParent()).getGameNumber()
-						);
+				if (JOptionPane.showConfirmDialog(getRootPane(), "Are You Sure?") == 0) {
+					MahJongGUI.getMGUI().newGame(((MahJong)getRootPane().getParent()).getGameNumber());
+				}
 			}
 		});
 

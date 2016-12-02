@@ -1,8 +1,7 @@
-
 /*
  * Daniel Bigelow
  * CS3230
- * 11/21/16
+ * 12/2/2016
  */
 
 import java.awt.Color;
@@ -14,7 +13,7 @@ import java.util.*;
 
 import javax.swing.*;
 
-public class MahJong extends JFrame implements WindowListener {
+public class MahJong extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private static MahJongBoard MAH;
@@ -22,37 +21,6 @@ public class MahJong extends JFrame implements WindowListener {
 	private JMenuBar menuBar;
 	private static int WIDTH = 1100;
 	private static int HEIGHT = 750;
-
-
-	public static int getWIDTH() {
-		return WIDTH;
-	}
-
-	public static int getHEIGHT() {
-		return HEIGHT;
-	}
-
-	// WindowEvents
-	public void windowClosing(WindowEvent e) {
-	}
-
-	public void windowOpened(WindowEvent e) {
-	}
-
-	public void windowClosed(WindowEvent e) {
-	}
-
-	public void windowIconified(WindowEvent e) {
-	}
-
-	public void windowDeiconified(WindowEvent e) {
-	}
-
-	public void windowActivated(WindowEvent e) {
-	}
-
-	public void windowDeactivated(WindowEvent e) {
-	}
 
 	public MahJong() {
 		
@@ -106,7 +74,8 @@ public class MahJong extends JFrame implements WindowListener {
 		JMenuItem helpOperation = new JMenuItem("Operation");
 		JMenuItem helpRules = new JMenuItem("Game Rules");
 
-		game.add(gamePlay);
+		
+		game.add(gamePlay); //starts a random game
 		gamePlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(getRootPane(), "Are You Sure?") == 0) {
@@ -116,7 +85,7 @@ public class MahJong extends JFrame implements WindowListener {
 				
 			}
 		});
-		game.add(gameRestart);
+		game.add(gameRestart); //restarts current game
 		gameRestart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(getRootPane(), "Are You Sure?") == 0) {
@@ -124,7 +93,7 @@ public class MahJong extends JFrame implements WindowListener {
 				}
 			}
 		});
-		game.add(gameNumbered);
+		game.add(gameNumbered);	//Starts a numbered game
 		gameNumbered.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -142,7 +111,7 @@ public class MahJong extends JFrame implements WindowListener {
 
 			}
 		});
-		game.add(gameExit);
+		game.add(gameExit); // Exits game
 		gameExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(getRootPane(), "Are You Sure?") == 0) {
@@ -151,53 +120,54 @@ public class MahJong extends JFrame implements WindowListener {
 			}
 		});
 
-		soundOff.setSelected(true);
+		sound.add(soundOff);
+		soundOff.setSelected(true); //Allows sounds to be turned off
 		soundOff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Sounds.setSoundon(((JCheckBoxMenuItem) e.getSource()).isSelected());
 			}
 		});
+		
 
-		sound.add(soundOff);
 
-		move.add(moveUndo);
+		move.add(moveUndo);	// Undo last Move
 		moveUndo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MahJongGUI.getMGUI().removeMove();
 			}
 		});
 
-		help.add(helpOperation); // todo
-		help.add(helpRules); // todo 
+		help.add(helpOperation); // Displays Operations when clicked
+		helpOperation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					new Help("Operations.html","Operations");
+			}
+		});
+		help.add(helpRules); // Displays Rules when clicked 
+		helpRules.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Help("Rules.html","Rules");
+			}
+		});
 
 		menuBar.add(game);
 		menuBar.add(sound);
 		menuBar.add(move);
 		menuBar.add(help);
-		
-	
+
 		setVisible(true);
-		
-		
-		
+	
 	}
 
-	public static MahJongBoard getMAH() {
-		return MAH;
-	}
-
-	public static void setMAH(MahJongBoard mAH) {
-		MAH = mAH;
-	}
 
 	public void newGame(int gameNumber) {
 		this.gameNumber = gameNumber;
 		this.setTitle("MahJong - " + this.gameNumber);
-		remove(MAH);
+		remove(MAH);			//remove the old game from the window
 		MAH = new MahJongBoard(gameNumber);
 		MAH.setPreferredSize(new Dimension(1100, 600));
-		add(MAH);
-		Move.resetMyMoves();
+		add(MAH);				//add the new game to the window
+		Move.resetMyMoves();  //resets the moves list
 		repaint();
 		revalidate();
 		menuBar.repaint();
@@ -207,13 +177,28 @@ public class MahJong extends JFrame implements WindowListener {
 	public int getGameNumber() {
 		return gameNumber;
 	}
+	
+	public static int getWIDTH() {
+		return WIDTH;
+	}
+
+	public static int getHEIGHT() {
+		return HEIGHT;
+	}
 
 	public void setGameNumber(int gameNumber) {
 		this.gameNumber = gameNumber;
 	}
+	
+	public static MahJongBoard getMAH() {
+		return MAH;
+	}
+
+	public static void setMAH(MahJongBoard mAH) {
+		MAH = mAH;
+	}
 
 	public static void main(String[] args) {
 		new MahJong();
-		
 	}
 }

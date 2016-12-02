@@ -49,16 +49,20 @@ public class Help extends JPanel implements HyperlinkListener
 		this(file);
 
 		frame = new JFrame();
-		URL	url = Help.class.getResource("images/Help24.gif");
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(url));
+		Image img = getToolkit().getImage(getClass().getResource("images/B.png"));
+		frame.setIconImage(img);
 
 		frame.addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent event)
 				{ frame.setVisible(false); }
 		});
 
-		JButton	close = ButtonFactory.makeImageButton("images/Stop24.gif", "Close the help system",
-				"close", this, true);
+		JButton	close = new JButton("Close");
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getRootPane().getParent().setVisible(false);
+			}
+		});
 
 		controls.add(close);
 
@@ -66,6 +70,7 @@ public class Help extends JPanel implements HyperlinkListener
 
 		frame.setSize(800,600);
 		frame.setTitle(title);
+		frame.setVisible(true);
 	}
 
 
@@ -85,14 +90,6 @@ public class Help extends JPanel implements HyperlinkListener
 		readHTML(file);
 
 		add(controls, BorderLayout.SOUTH);
-
-		back = ButtonFactory.makeImageButton("images/Back24.gif", "Return to the previous help page", "back", this, true);
-		next = ButtonFactory.makeImageButton("images/Forward24.gif", "Goto the next help page", "forward", this, true);
-
-		controls.add(back);
-		controls.add(next);
-		back.setEnabled(false);
-		next.setEnabled(false);
 	}
 
 

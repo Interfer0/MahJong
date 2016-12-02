@@ -1,17 +1,12 @@
 
 /*
-
  * Daniel Bigelow
-
  * CS3230
-
- * 11/21/16
-
+ * 12/2/2016
  */
 
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.reflect.GenericArrayType;
 import java.util.*;
 import javax.swing.*;
 

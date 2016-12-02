@@ -210,10 +210,14 @@ public class Fireworks implements Runnable {
 		/**
 		 * Plays the sound of an exploding firework.
 		 */
-
+		
 		public void play() {
-			if (sound)
-				explosion.play();
+				if(Sounds.getSoundon()) //check sounds
+				{
+				if (sound)
+					explosion.play();
+				}
+			
 		}
 
 		/**
@@ -231,7 +235,7 @@ public class Fireworks implements Runnable {
 				int y1 = (int) round(y0 - length * sin(theta));
 
 				new AnimatedLine(x0, y0, length, theta, r, color, false).start().join();
-
+				
 				play();
 				explode(x1, y1, 2 * r, color);
 			} catch (InterruptedException ie) {
@@ -374,26 +378,5 @@ public class Fireworks implements Runnable {
 		}
 	}
 
-	/**
-	 * Test and demonstration.
-	 */
-
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		Fireworks fw = new Fireworks();
-
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1000, 800);
-		frame.add(fw.getPanel());
-		frame.setVisible(true);
-
-		fw.setExplosions(0, 1000);
-		fw.fire(1000, 800);
-
-		try {
-			Thread.sleep(10000);
-			fw.stop();
-		} catch (InterruptedException ie) {
-		}
-	}
+	
 }
