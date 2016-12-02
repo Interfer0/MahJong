@@ -101,8 +101,8 @@ public class MahJongModel implements LayoutManager
 				//layer 1
 				if(i == 1)	//Tippytop tile
 				{	
-					x = parent.getWidth()/2-Tile.getWIDTH()/2; 
-					y = 3*offset + parent.getHeight()/2-2*Tile.getHEIGHT()/2;
+					x = parent.getWidth()/2-Tile.getWIDTH()/2+Tile.getDEPTH(); 
+					y = 3*offset + parent.getHeight()/2-2*Tile.getHEIGHT()/2-Tile.getDEPTH();
 				}
 				
 				// layer 2
@@ -114,7 +114,7 @@ public class MahJongModel implements LayoutManager
 						MahJongBoard.getTILES()[tileNumber].setToR(MahJongBoard.getTILES()[tileNumber +1]);
 						counter = 0;
 						x = parent.getWidth()/2-Tile.getWIDTH();
-						y = 3*offset + parent.getHeight()/2-Tile.getHEIGHT()/2;
+						y = 3*offset + parent.getHeight()/2-Tile.getHEIGHT()/2-Tile.getDEPTH()/2;
 					} else {
 						
 						x += previousWidth - Tile.getDEPTH();

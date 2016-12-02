@@ -85,10 +85,11 @@ public class MahJong extends JFrame implements WindowListener {
 		MAH = new MahJongBoard(gameNumber);
 		MAH.setPreferredSize(new Dimension(1100, 600));
 		add(MAH);
+		
 
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-
+		
 		JMenu game = new JMenu("Game");
 		JMenuItem gamePlay = new JMenuItem("Play");
 		JMenuItem gameRestart = new JMenuItem("Restart");
@@ -112,7 +113,7 @@ public class MahJong extends JFrame implements WindowListener {
 					Random rnd = new Random();
 					MahJongGUI.getMGUI().newGame(Math.abs(rnd.nextInt()));
 				}
-
+				
 			}
 		});
 		game.add(gameRestart);

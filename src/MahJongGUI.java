@@ -16,6 +16,9 @@ public class MahJongGUI extends JPanel {
 	private JPanel buttons;
 
 	private JPanel playedTiles;
+	public JPanel getPlayedTiles() {
+		return playedTiles;
+	}
 	private JScrollPane tilesScrollPane;
 	private static MahJongGUI MGUI;
 
@@ -42,6 +45,7 @@ public class MahJongGUI extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				Random rnd = new Random();
 				MahJongGUI.MGUI.newGame(Math.abs(rnd.nextInt()));
+
 			}
 		});
 
@@ -64,7 +68,7 @@ public class MahJongGUI extends JPanel {
 		buttons.add(playAgain);
 		buttons.add(undoButton);
 
-		add(buttons);
+		
 
 		playedTiles = new JPanel();
 		playedTiles.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -81,6 +85,7 @@ public class MahJongGUI extends JPanel {
 		tilesScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		tilesScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		add(tilesScrollPane);
+		add(buttons);
 	}
 
 	protected void newGame(int gameNumber) {

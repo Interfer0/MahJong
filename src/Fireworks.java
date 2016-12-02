@@ -82,13 +82,18 @@ public class Fireworks implements Runnable {
 	 */
 
 	public void fire(int width, int height) {
+		
+			
 		this.width = width;
 		this.height = height;
 		oldBG = panel.getBackground();
 		
 		panel.setBackground(Color.BLACK);
-
+		MahJongGUI.getMGUI().repaint();
+		MahJongGUI.getMGUI().revalidate();
 		(fireThread = new Thread(group, this)).start();
+		
+
 		
 	}
 
@@ -123,9 +128,20 @@ public class Fireworks implements Runnable {
 			for (int i = 0; explosions == 0 || i < explosions; i++) {
 				new Thread(group, new StarBurst()).start();
 				Thread.sleep(rand.nextInt(maxDelay));
+				
 			}
 		} catch (InterruptedException ie) {
+			
 		}
+		
+		while(group.activeCount() > 5){}
+		explosions = 0;
+		group.interrupt();
+		panel.setBackground(oldBG);
+		panel.repaint();
+		panel.revalidate();
+		MahJongGUI.getMGUI().repaint();
+		MahJongGUI.getMGUI().revalidate();
 	}
 
 	/**

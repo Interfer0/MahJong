@@ -138,13 +138,13 @@ public class MahJongBoard extends JPanel implements MouseListener {
 							MahJongGUI.getMGUI().addMove(move);
 							sound.doubleClick();
 							
-							//if(Move.getMyMoves().size() == 144)
-							//{
-								System.out.println(sT.getParent().getParent());
-								fire.setExplosions(0, 1000);
-								fire.fire(MahJong.getWIDTH(),MahJong.getHEIGHT());
+							if(Move.getMyMoves().size() == 144)
+							{
 								
-							//}
+								fire.setExplosions(23, 1000);
+								fire.fire(MahJong.getWIDTH(),MahJong.getHEIGHT());
+							
+							}
 						} else {
 							sound.noMatchClick();
 						}
@@ -152,6 +152,7 @@ public class MahJongBoard extends JPanel implements MouseListener {
 						TILES[MahJongGUI.getMGUI().getTileOneIndex()].setUnselected();
 						sT.setUnselected();
 						MahJongGUI.getMGUI().resetTileOne();
+						
 
 					}
 				}
