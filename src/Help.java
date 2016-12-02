@@ -5,7 +5,6 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.text.*;
 import javax.swing.event.*;
 
 
@@ -21,6 +20,8 @@ import javax.swing.event.*;
 
 public class Help extends JPanel implements HyperlinkListener
 {
+
+	private static final long serialVersionUID = 1L;
 	private	JEditorPane	text = new JEditorPane();
 	private	JScrollPane	scroller = new JScrollPane();
 	private	JPanel		controls = new JPanel();
@@ -212,7 +213,6 @@ public class Help extends JPanel implements HyperlinkListener
 	{
 		try
 		{
-			Document doc = text.getDocument();
 			text.setEditable(false);
 
 			currentURL = Help.class.getResource(file);

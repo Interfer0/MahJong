@@ -1,27 +1,25 @@
-
+/*
+ * Daniel Bigelow
+ * CS3230
+ * 12/2/2016
+ */
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
-
 import javax.swing.*;
 
 public class MahJongGUI extends JPanel {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Tile tileOne;
 	private int tileOneIndex;
 	private JPanel buttons;
 
 	private JPanel playedTiles;
-	public JPanel getPlayedTiles() {
-		return playedTiles;
-	}
 	private JScrollPane tilesScrollPane;
 	private static MahJongGUI MGUI;
 
+	
 	public MahJongGUI(int width) {
 		
 		MahJongGUI.setMGUI(this);
@@ -29,7 +27,7 @@ public class MahJongGUI extends JPanel {
 		setBounds(0, 0, width, 110);
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-		Button undoButton = new Button("Undo");
+		Button undoButton = new Button("Undo");	//Undoes last move
 		undoButton.setPreferredSize(new Dimension(190, 40));
 		undoButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -38,7 +36,7 @@ public class MahJongGUI extends JPanel {
 			}
 		});
 
-		Button newGame = new Button("New Game");
+		Button newGame = new Button("New Game"); //Starts a new random game
 		newGame.setPreferredSize(new Dimension(190, 20));
 		newGame.addMouseListener(new MouseAdapter() {
 			@Override
@@ -50,7 +48,7 @@ public class MahJongGUI extends JPanel {
 			}
 		});
 
-		Button playAgain = new Button("Play This Board Again");
+		Button playAgain = new Button("Play This Board Again");	//starts the same game over
 		playAgain.setPreferredSize(new Dimension(190, 20));
 		playAgain.addMouseListener(new MouseAdapter() {
 			@Override
@@ -89,17 +87,20 @@ public class MahJongGUI extends JPanel {
 		add(buttons);
 	}
 
+	//creates a new game with a gameNumber
 	protected void newGame(int gameNumber) {
 		((MahJong)getRootPane().getParent()).newGame(gameNumber);
 		setupGUI();
 	}
 
+	//Resets the GUI to null
 	private void setupGUI() {
 		playedTiles.removeAll();
 		playedTiles.repaint();
 		playedTiles.revalidate();
 	}
 
+	//sets a tile as selected and moves a copy into the GUI for display
 	public void setTileOne(int i) {
 		tileOneIndex = i;
 		try {
@@ -112,24 +113,19 @@ public class MahJongGUI extends JPanel {
 		this.add(tileOne, BorderLayout.LINE_START);
 		this.repaint();
 		this.revalidate();
-
 	}
 
+	//resets tile one to be unselected
 	public void resetTileOne() {
-		
 			this.remove(tileOne);
 			tileOne = null;
 			tileOneIndex = -1;
 			this.repaint();
-			this.revalidate(); 
-		
-		
+			this.revalidate(); 		
 	}
 	
-	public void setTileOneIndex(int tileOneIndex) {
-		this.tileOneIndex = tileOneIndex;
-	}
-	
+	public void setTileOneIndex(int tileOneIndex) {this.tileOneIndex = tileOneIndex;}
+	public JPanel getPlayedTiles() {return playedTiles;}
 	public int getTileOneIndex(){return tileOneIndex;}
 	public Tile getTileOne(){return tileOne;}
 	public void addMove(Move move){Move.addMove(move, playedTiles);}

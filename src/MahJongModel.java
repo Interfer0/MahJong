@@ -1,74 +1,17 @@
 /*
  * Daniel Bigelow
  * CS3230
- * 11/21/16
+ * 12/2/2016
  */
 import java.awt.*;
 
 public class MahJongModel implements LayoutManager
 {
-	private int vgap = 0;
-	private int minWidth = 0, minHeight = 0;
-	private int preferredWidth = 0, preferredHeight = 0;
-	private boolean sizeUnknown = true;
+
 	private static int counter = 0;
 	private static int tileNumber  = 0;
 	private static int offset = 20;
 	
-	public static int getCounter() {return counter;}
-
-	public static void setCounter(int counter) {MahJongModel.counter = counter;}
-
-	public static int getTileNumber() {return tileNumber;}
-
-	public static void setTileNumber(int tileNumber) {MahJongModel.tileNumber = tileNumber;}
-
-	
-	
-	@Override
-	public void addLayoutComponent(String name, Component comp){}
-
-	@Override
-	public void removeLayoutComponent(Component comp){}
-
-	@Override
-	public Dimension preferredLayoutSize(Container parent){return null;}
-
-	@Override
-	public Dimension minimumLayoutSize(Container parent){return null;}
-
-	private void setSizes(Container parent)
-	{
-		int nComps = parent.getComponentCount();
-		Dimension d = null;
-
-		preferredWidth = 0;
-		preferredHeight = 0;
-		minWidth = 0;
-		minHeight = 0;
-
-		for (int i = 0; i < nComps; i++)
-		{
-			Component c = parent.getComponent(i);
-			if (c.isVisible())
-			{
-				d = c.getPreferredSize();
-
-				if (i > 0)
-				{
-					preferredWidth += d.width / 2;
-					preferredHeight += vgap;
-				} else
-				{
-					preferredWidth = d.width;
-				}
-				preferredHeight += d.height;
-
-				minWidth = Math.max(c.getMinimumSize().width, minWidth);
-				minHeight = preferredHeight;
-			}
-		}
-	}
 
 	@Override
 	public void layoutContainer(Container parent)
@@ -78,11 +21,6 @@ public class MahJongModel implements LayoutManager
 		int previousHeight = 0;
 		int x = parent.getWidth()/2-7*Tile.getWIDTH()-3*Tile.getDEPTH();
 		int y = offset + parent.getHeight()/2-Tile.getDEPTH();
-
-		if (sizeUnknown)
-		{
-			setSizes(parent);
-		}
 
 		for (int i = 0; i < nComps; i++)
 		{
@@ -314,5 +252,21 @@ public class MahJongModel implements LayoutManager
 		}
 
 	}
+	
+	public static int getCounter() {return counter;}
+	public static void setCounter(int counter) {MahJongModel.counter = counter;}
+	public static int getTileNumber() {return tileNumber;}
+	public static void setTileNumber(int tileNumber) {MahJongModel.tileNumber = tileNumber;}
+
+	
+	
+	@Override
+	public void addLayoutComponent(String name, Component comp){}
+	@Override
+	public void removeLayoutComponent(Component comp){}
+	@Override
+	public Dimension preferredLayoutSize(Container parent){return null;}
+	@Override
+	public Dimension minimumLayoutSize(Container parent){return null;}
 
 }

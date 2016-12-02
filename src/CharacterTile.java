@@ -1,14 +1,14 @@
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.*;
-
 /*
  * Daniel Bigelow
  * CS3230
- * 11/10/16
+ * 12/2/2016
  */
+
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.*;
+
 public class CharacterTile extends Tile {
 	
 

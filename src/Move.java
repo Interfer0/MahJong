@@ -1,5 +1,10 @@
-import java.util.Stack;
+/*
+ * Daniel Bigelow
+ * CS3230
+ * 12/2/2016
+ */
 
+import java.util.Stack;
 import javax.swing.JPanel;
 
 public class Move extends JPanel {
@@ -9,35 +14,13 @@ public class Move extends JPanel {
 	private int tileTwo;
 	private static Stack<Move> myMoves = new Stack<Move>();
 
+	//constructor
 	public Move(int tileOne, int tileTwo) {
 		this.setTileOne(tileOne);
 		this.setTileTwo(tileTwo);
 	}
 
-	public int getTileTwo() {
-		return tileTwo;
-	}
-
-	public void setTileTwo(int tileTwo) {
-		this.tileTwo = tileTwo;
-	}
-
-	public int getTileOne() {
-		return tileOne;
-	}
-
-	public void setTileOne(int tileOne) {
-		this.tileOne = tileOne;
-	}
-
-	public static Stack<Move> getMyMoves() {
-		return myMoves;
-	}
-
-	public static void setMyMoves(Stack<Move> myMoves) {
-		Move.myMoves = myMoves;
-	}
-
+	//Makes a new move, and adds it to the stack
 	public static void addMove(Move move, JPanel playedTiles) {
 		MahJongBoard.getTILES()[move.getTileOne()].setUnselected();
 		Tile t1 = Tile.getTileClone(move.getTileOne());
@@ -54,6 +37,7 @@ public class Move extends JPanel {
 		myMoves.push(move);
 	}
 
+	//remove a move from the stack and GUI
 	public static void removeMove(JPanel playedTiles) {
 		if (playedTiles.getComponentCount() > 0) {
 			Move popped = getMyMoves().pop();
@@ -66,8 +50,17 @@ public class Move extends JPanel {
 		}
 	}
 
+	//Resets the moves to 0
 	public static void resetMyMoves() {
 		myMoves = new Stack<Move>();
 		
 	}
+	
+	//Getters and setters
+	public int getTileTwo(){return tileTwo;}
+	public void setTileTwo(int tileTwo){this.tileTwo = tileTwo;}
+	public int getTileOne(){return tileOne;}
+	public void setTileOne(int tileOne){this.tileOne = tileOne;}
+	public static Stack<Move> getMyMoves(){return myMoves;}
+	public static void setMyMoves(Stack<Move> myMoves){Move.myMoves = myMoves;}
 }

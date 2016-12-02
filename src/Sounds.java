@@ -1,9 +1,15 @@
+/*
+ * Daniel Bigelow
+ * CS3230
+ * 12/2/2016
+ */
+
 import java.io.File;
 import java.io.IOException;
-
 import javax.sound.sampled.*;
 
 public class Sounds {
+	
 	private static Boolean soundon = true;
 
 	public void singleClick() {
@@ -66,12 +72,8 @@ public class Sounds {
 			}
 	}
 
-	public static Boolean getSoundon() { 
-		return soundon;
-	}
+	public static Boolean getSoundon(){return soundon;}
 
-	public static void setSoundon(Boolean soundon) {
-		Sounds.soundon = soundon;
-	}
+	public static void setSoundon(Boolean soundon){Sounds.soundon = soundon;}
 
 }

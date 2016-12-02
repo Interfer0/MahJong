@@ -1,4 +1,3 @@
-
 /*
  * Daniel Bigelow
  * CS3230
@@ -10,12 +9,12 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
+//MahJongBoard class handles the board using the MahJong model as the layout. 
+//The board also handles all tile clicks and checks for matches of those tiles
 public class MahJongBoard extends JPanel implements MouseListener {
-	/**
-	* 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	private static Tile[] TILES = new Tile[144];
+	private static Tile[] TILES = new Tile[144]; //list of tiles
 	private static Image img;
 	private static Sounds sound = new Sounds();
 	private static Fireworks fire;
@@ -26,8 +25,9 @@ public class MahJongBoard extends JPanel implements MouseListener {
 
 		this.setBackground(new Color(11, 112, 15));
 		MahJongModel model = new MahJongModel(); // Custom layout Model
-		MahJongModel.setTileNumber(0);
-		MahJongModel.setCounter(0);
+		MahJongModel.setTileNumber(0); // tracks the current tile being places
+		MahJongModel.setCounter(0); // tracks the current tile after 50 or so
+									// tiles
 		model.preferredLayoutSize(this);
 		this.setLayout(model);
 		for (Tile t : TILES) {
@@ -45,7 +45,6 @@ public class MahJongBoard extends JPanel implements MouseListener {
 		setVisible(true);
 		this.repaint();
 
-	
 	}
 
 	// paint the background
@@ -103,17 +102,8 @@ public class MahJongBoard extends JPanel implements MouseListener {
 		return myReturn;
 	}
 
-	// Tile List
-	public static Tile[] getTILES() {
-		return TILES;
-	}
-
-	public static void setTILES(Tile[] Tiles) {
-		TILES = Tiles;
-	}
-
+	//runs whenever a tile is clicked on the board. 
 	public static void playClick(Tile sT) {
-		
 		if (sT.isPlayable()) {
 			// check if tile is null
 			for (int i = 0; i <= TILES.length - 1; i++) {
@@ -132,13 +122,12 @@ public class MahJongBoard extends JPanel implements MouseListener {
 							Move move = new Move(i, MahJongGUI.getMGUI().getTileOneIndex());
 							MahJongGUI.getMGUI().addMove(move);
 							sound.doubleClick();
-							
-							if(Move.getMyMoves().size() == 144)
-							{
-								
+
+							if (Move.getMyMoves().size() == 144) {
+
 								fire.setExplosions(23, 1000);
-								fire.fire(MahJong.getWIDTH(),MahJong.getHEIGHT());
-							
+								fire.fire(MahJong.getWIDTH(), MahJong.getHEIGHT());
+
 							}
 						} else {
 							sound.noMatchClick();
@@ -147,41 +136,40 @@ public class MahJongBoard extends JPanel implements MouseListener {
 						TILES[MahJongGUI.getMGUI().getTileOneIndex()].setUnselected();
 						sT.setUnselected();
 						MahJongGUI.getMGUI().resetTileOne();
-						
 
 					}
 				}
 			}
 		}
-		
+
+	}
+
+	// Tile List
+	public static Tile[] getTILES() {
+		return TILES;
+	}
+
+	public static void setTILES(Tile[] Tiles) {
+		TILES = Tiles;
 	}
 
 	// Reset the selected tile if the board is clicked
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(MahJongGUI.getMGUI().getTileOne() != null)
-		{
+		if (MahJongGUI.getMGUI().getTileOne() != null) {
 			TILES[MahJongGUI.getMGUI().getTileOneIndex()].setUnselected();
 			MahJongGUI.getMGUI().resetTileOne();
 			sound.noMatchClick();
 		}
 	}
-
 	@Override
-	public void mousePressed(MouseEvent e) {
-	}
-
+	public void mousePressed(MouseEvent e) {}
 	@Override
-	public void mouseReleased(MouseEvent e) {
-	}
-
+	public void mouseReleased(MouseEvent e) {}
 	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
+	public void mouseEntered(MouseEvent e) {}
 	@Override
-	public void mouseExited(MouseEvent e) {
-	}
+	public void mouseExited(MouseEvent e) {}
 
 }
 
