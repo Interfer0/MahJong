@@ -95,6 +95,7 @@ public class MahJongGUI extends JPanel {
 
 	//Resets the GUI to null
 	private void setupGUI() {
+		resetTileOne();
 		playedTiles.removeAll();
 		playedTiles.repaint();
 		playedTiles.revalidate();
