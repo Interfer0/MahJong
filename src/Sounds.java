@@ -4,8 +4,9 @@
  * 12/2/2016
  */
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+
 import javax.sound.sampled.*;
 
 public class Sounds {
@@ -15,9 +16,8 @@ public class Sounds {
 	public void singleClick() {
 		if (soundon == true)
 			try {
-				ClassLoader classloader = getClass().getClassLoader();
-				File audioFile = new File(classloader.getResource("sounds/singleclick.wav").getFile());
-				AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+				URL url = this.getClass().getResource("sounds/singleclick.wav");
+				AudioInputStream audioStream = AudioSystem.getAudioInputStream(url);
 				AudioFormat format = audioStream.getFormat();
 				DataLine.Info info = new DataLine.Info(Clip.class, format);
 				Clip audioClip = (Clip) AudioSystem.getLine(info);
@@ -35,9 +35,8 @@ public class Sounds {
 	public void noMatchClick() {
 		if (soundon == true)
 			try {
-				ClassLoader classloader = getClass().getClassLoader();
-				File audioFile = new File(classloader.getResource("sounds/nomatch.wav").getFile());
-				AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+				URL url = this.getClass().getResource("sounds/nomatch.wav");
+				AudioInputStream audioStream = AudioSystem.getAudioInputStream(url);
 				AudioFormat format = audioStream.getFormat();
 				DataLine.Info info = new DataLine.Info(Clip.class, format);
 				Clip audioClip = (Clip) AudioSystem.getLine(info);
@@ -55,9 +54,8 @@ public class Sounds {
 	public void doubleClick() {
 		if (soundon == true)
 			try {
-				ClassLoader classloader = getClass().getClassLoader();
-				File audioFile = new File(classloader.getResource("sounds/doubleclick.wav").getFile());
-				AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+				URL url = this.getClass().getResource("sounds/doubleclick.wav");
+				AudioInputStream audioStream = AudioSystem.getAudioInputStream(url);
 				AudioFormat format = audioStream.getFormat();
 				DataLine.Info info = new DataLine.Info(Clip.class, format);
 				Clip audioClip = (Clip) AudioSystem.getLine(info);
